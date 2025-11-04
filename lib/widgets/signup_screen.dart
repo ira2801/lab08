@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-String? savedName;
-String? savedLogin;
-String? savedPassword;
+import 'sign_in_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -20,16 +18,17 @@ class _SignupScreenState extends State<SignupScreen> {
     String login = loginController.text.trim();
     String password = passwordController.text.trim();
 
-    if (login.isEmpty || password.isEmpty|| name.isEmpty) {
+    if (name.isEmpty || login.isEmpty || password.isEmpty) {
       showDialog(
         context: context,
         builder: (ctx) => const AlertDialog(
           title: Text("Помилка"),
-          content: Text("Будь ласка, введіть логін і пароль"),
+          content: Text("Будь ласка, заповніть усі поля"),
         ),
       );
       return;
     }
+
     savedName = name;
     savedLogin = login;
     savedPassword = password;
@@ -37,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Реєстрація успішна"),
+        title: const Text("Реєстрація успішна ✅"),
         content: Text("Імʼя: $name\nЛогін: $login\nПароль: $password"),
         actions: [
           TextButton(
@@ -58,45 +57,38 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(title: const Text("Реєстрація")),
       body: Padding(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Створіть акаунт", style: TextStyle(fontSize: 22)),
-            const SizedBox(height: 16),
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                labelText: "Імʼя",
-                border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Створіть акаунт", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: "Імʼя"),
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: loginController,
-              decoration: const InputDecoration(
-                labelText: "Логін",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+              TextField(
+                controller: loginController,
+                decoration: const InputDecoration(labelText: "Логін"),
               ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Пароль",
-                border: OutlineInputBorder(),
+              const SizedBox(height: 12),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: "Пароль"),
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _registerUser,
-              child: const Text("Зареєструватися"),
-            ),
-            OutlinedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Назад"),
-            ),
-          ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _registerUser,
+                child: const Text("Зареєструватися"),
+              ),
+              OutlinedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Назад"),
+              ),
+            ],
+          ),
         ),
       ),
     );

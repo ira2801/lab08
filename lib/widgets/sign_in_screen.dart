@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'signup_screen.dart';
 import 'reset_password_screen.dart';
 
+String? savedName;
+String? savedLogin;
+String? savedPassword;
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -43,59 +47,51 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Авторизація",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: loginController,
-                decoration: const InputDecoration(
-                  labelText: "Логін",
-                  border: OutlineInputBorder(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Авторизація",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Пароль",
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 24),
+                TextField(
+                  controller: loginController,
+                  decoration: const InputDecoration(labelText: "Логін"),
                 ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _checkLogin,
-                child: const Text("Увійти"),
-              ),
-              const SizedBox(height: 8),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignupScreen(),
-                    ),
-                  );
-                },
-                child: const Text("Зареєструватися"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ResetPasswordScreen(),
-                    ),
-                  );
-                },
-                child: const Text("Забули пароль?"),
-              ),
-            ],
+                const SizedBox(height: 12),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(labelText: "Пароль"),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: _checkLogin,
+                  child: const Text("Увійти"),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignupScreen()),
+                    );
+                  },
+                  child: const Text("Зареєструватися"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ResetPasswordScreen()),
+                    );
+                  },
+                  child: const Text("Забули пароль?"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
