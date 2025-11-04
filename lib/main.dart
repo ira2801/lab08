@@ -60,7 +60,6 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: Colors.blue.shade700,
